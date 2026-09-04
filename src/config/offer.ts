@@ -8,9 +8,9 @@ export const OFFER_CONFIG = {
     "https://aperfeicoamentocristao.com.br/pregador-vocacionado-oficial/?ref=N107470566X",
   checkoutUrl:
     "https://go.hotmart.com/N107470566X?ap=eb29",
-  cashPrice: "R$ 162,00",
-  installmentPrice: "12x de R$ 16,17",
-  priceInCents: 16200,
+  cashPrice: "R$ 64,90",
+  installmentPrice: "Até 7x de R$ 10,61",
+  priceInCents: 6490,
   lessonCount: 40,
   bonusCount: 5,
   accessType: "Acesso vitalício",

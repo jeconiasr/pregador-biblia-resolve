@@ -40,7 +40,7 @@ export const SeoStructuredData: React.FC = () => {
       },
       "offers": {
         "@type": "Offer",
-        "price": "162.00",
+        "price": "64.90",
         "priceCurrency": "BRL",
         "availability": "https://schema.org/InStock",
         "url": OFFER_CONFIG.checkoutUrl,
