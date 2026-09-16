@@ -28,8 +28,7 @@ export const LessonHero: React.FC = () => {
 
         {/* Subheadline */}
         <p className="text-base sm:text-lg md:text-xl text-[#22303C]/85 max-w-2xl mx-auto leading-relaxed mb-8">
-          Assista à aula e entenda como transformar estudo e anotações em uma mensagem com começo,
-          desenvolvimento e conclusão — antes de pensar em subir ao púlpito.
+          Assista à aula gratuita e descubra como transformar um texto bíblico em uma mensagem organizada, clara e aplicável — mesmo que você ainda esteja começando.
         </p>
 
         {/* CTA Button to scroll to the video */}
@@ -45,18 +44,18 @@ export const LessonHero: React.FC = () => {
           </a>
 
           {/* Microcopy */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs sm:text-sm text-[#68727D] mt-2 font-medium">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs sm:text-sm text-[#68727D] mt-2 font-medium">
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-[#356F9F]" />
-              Aproximadamente 24 minutos
+              Cerca de 24 minutos
             </span>
-            <span className="hidden sm:inline text-[#DED7CC]">•</span>
+            <span className="text-[#DED7CC]">•</span>
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-[#2F7665]" />
               Sem cadastro
             </span>
-            <span className="hidden sm:inline text-[#DED7CC]">•</span>
-            <span>Conteúdo do Aperfeiçoamento Cristão</span>
+            <span className="text-[#DED7CC]">•</span>
+            <span>Conteúdo prático</span>
           </div>
         </div>
       </div>

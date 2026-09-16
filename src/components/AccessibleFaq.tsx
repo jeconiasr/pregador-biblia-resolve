@@ -11,63 +11,51 @@ export interface FaqItem {
 export const FAQ_ITEMS: FaqItem[] = [
   {
     id: "faq-1",
-    question: "O curso começa do zero?",
+    question: "Como recebo o acesso ao curso?",
     answer:
-      "Sim, o treinamento começa pelos fundamentos da interpretação bíblica e da estruturação do sermão, atendendo tanto quem nunca pregou quanto quem já prega e busca organizar melhor o seu método.",
+      "O acesso é enviado imediatamente após a confirmação do pagamento. Você receberá um e-mail da Hotmart com seus dados de login e o link para acessar a plataforma e começar a assistir às aulas agora mesmo.",
   },
   {
     id: "faq-2",
-    question: "Preciso ter feito seminário para acompanhar?",
+    question: "Por quanto tempo terei acesso às aulas?",
     answer:
-      "Não há essa exigência na oferta. A linguagem utilizada pelo professor Wallace Mello é didática, acessível e voltada para a aplicação prática no ministério local, sem pré-requisito de formação teológica prévia.",
+      "O acesso é vitalício. Você pode assistir no seu próprio ritmo, rever quantas vezes precisar e consultar os materiais e bônus sempre que for preparar uma nova pregação.",
   },
   {
     id: "faq-3",
-    question: "Como receberei o acesso ao curso?",
+    question: "O curso serve para quem nunca pregou?",
     answer:
-      "O pagamento e o processamento são realizados pela Hotmart. Assim que a transação for confirmada (instantânea no cartão ou Pix), a Hotmart envia um e-mail com os dados e o link para criar sua senha e entrar na área de membros.",
+      "Sim, perfeitamente. O professor Wallace Mello ensina desde os primeiros passos da interpretação do texto bíblico até a montagem da estrutura e a oratória, com linguagem didática e acessível.",
   },
   {
     id: "faq-4",
-    question: "Por quanto tempo terei acesso às aulas?",
+    question: "O curso tem certificado?",
     answer:
-      "O produtor informa acesso vitalício. Isso significa que você pode assistir no seu ritmo, quando quiser, e revisitar os módulos sempre que for preparar uma nova pregação.",
+      "Sim. Ao concluir a visualização das 40 videoaulas, você pode emitir digitalmente o seu certificado de conclusão diretamente na área de membros, sem custo adicional.",
   },
   {
     id: "faq-5",
-    question: "Há certificado de conclusão?",
+    question: "Quais são as formas de pagamento?",
     answer:
-      "Sim, ao concluir as 40 videoaulas, você pode emitir digitalmente o seu certificado de conclusão disponibilizado na própria plataforma.",
+      "Você pode pagar com cartão de crédito (em até 7x de R$ 10,61), Pix à vista (com liberação imediata) ou boleto bancário através da plataforma segura da Hotmart.",
   },
   {
     id: "faq-6",
-    question: "O curso é reconhecido pelo MEC?",
+    question: "Como funciona a garantia de 7 dias?",
     answer:
-      "Não. Trata-se de um curso livre de capacitação bíblica, ministerial e eclesiástica, amparado pela Lei de Diretrizes e Bases da Educação (Lei nº 9.394/96). Não confere grau acadêmico superior nem substitui graduação universitária.",
+      "Você tem 7 dias para testar todo o conteúdo. Se achar que o treinamento não é para você, basta solicitar o reembolso com um clique na Hotmart e receber 100% do seu dinheiro de volta, sem burocracia.",
   },
   {
     id: "faq-7",
-    question: "Existe suporte para tirar dúvidas?",
+    question: "A aula gratuita acima faz parte do curso?",
     answer:
-      "O produtor informa que há suporte para os alunos tirarem dúvidas sobre os conteúdos do treinamento diretamente na plataforma de estudos.",
+      "A aula gratuita disponibilizada nesta página é um conteúdo aberto sobre esboço bíblico em Isaías 6 para entregar valor imediato a você. O curso completo aprofunda todas as etapas com 40 aulas gravadas e 5 bônus.",
   },
   {
     id: "faq-8",
-    question: "Como funciona a garantia de 30 dias?",
-    answer:
-      "O produtor informa um prazo de garantia incondicional de 30 dias. Se dentro desse período você avaliar que o treinamento não atende às suas expectativas, pode solicitar o cancelamento e reembolso de acordo com as diretrizes da Hotmart.",
-  },
-  {
-    id: "faq-9",
     question: "A Bíblia Resolve é a produtora deste treinamento?",
     answer:
-      "Não. A Bíblia Resolve é um portal independente de divulgação bíblica e atua nesta página como afiliada. O curso, as videoaulas, o suporte e a entrega são de responsabilidade do Instituto de Aperfeiçoamento Cristão na Hotmart.",
-  },
-  {
-    id: "faq-10",
-    question: "A aula gratuita acima faz parte do curso?",
-    answer:
-      "A aula disponibilizada nesta página é um conteúdo aberto publicado pelo canal Aperfeiçoamento Cristão no YouTube sobre esboço passo a passo. Ela foi selecionada para entregar valor imediato a você antes de qualquer decisão comercial.",
+      "Não. A Bíblia Resolve atua como portal independente de indicação e curadoria editorial. O treinamento, suporte, plataforma e certificação são de responsabilidade do Instituto de Aperfeiçoamento Cristão.",
   },
 ];
 

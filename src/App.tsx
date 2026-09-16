@@ -5,11 +5,11 @@ import { PrivacyYouTubePlayer } from "./components/PrivacyYouTubePlayer";
 import { LessonCompanion } from "./components/LessonCompanion";
 import { VictorySection } from "./components/VictorySection";
 import { BlockerSelector, BlockerOption } from "./components/BlockerSelector";
-import { CourseBridge } from "./components/CourseBridge";
+import { CompactOfferCard } from "./components/CompactOfferCard";
 import { CourseTracks } from "./components/CourseTracks";
-import { BonusGrid } from "./components/BonusGrid";
 import { InstructorSection } from "./components/InstructorSection";
-import { FitSection } from "./components/FitSection";
+import { SocialProofSection } from "./components/SocialProofSection";
+import { BonusGrid } from "./components/BonusGrid";
 import { OfferCard } from "./components/OfferCard";
 import { GuaranteeSection } from "./components/GuaranteeSection";
 import { AccessibleFaq } from "./components/AccessibleFaq";
@@ -61,15 +61,22 @@ export default function App() {
     );
     if (playerEl) playerObserver.observe(playerEl);
 
-    // Observe offer section reach
-    const offerEl = document.getElementById("oferta");
+    // Observe offer sections (compact offer or full offer)
+    const offerCompactEl = document.getElementById("primeira-oferta");
+    const offerFullEl = document.getElementById("oferta-completa");
+
     const offerObserver = new IntersectionObserver(
       (entries) => {
-        setIsOfferInView(entries[0]?.isIntersecting || false);
+        const anyVisible = entries.some((entry) => entry.isIntersecting);
+        if (anyVisible) {
+          setIsOfferInView(true);
+        }
       },
       { threshold: 0.05 }
     );
-    if (offerEl) offerObserver.observe(offerEl);
+
+    if (offerCompactEl) offerObserver.observe(offerCompactEl);
+    if (offerFullEl) offerObserver.observe(offerFullEl);
 
     return () => {
       playerObserver.disconnect();
@@ -81,7 +88,7 @@ export default function App() {
     setHighlightedTrackId(blocker.matchingTrackId);
   };
 
-  // Rule 10: Show mobile sticky bar only when offer section is reached AND player is not active/visible
+  // Mobile sticky bar: appears once an offer is reached AND player is not active/visible
   const shouldShowMobileBar = isOfferInView && !isPlayerVisible && !isPlayerActive;
 
   return (
@@ -89,7 +96,7 @@ export default function App() {
       {/* Structured SEO Data for Search Engines */}
       <SeoStructuredData />
 
-      {/* Migration Notice Banner if user came from old /diagnostico-pregador route */}
+      {/* Migration Notice Banner if user came from old route */}
       {redirectedFromOldRoute && (
         <div className="bg-[#356F9F] text-[#FFFDF8] px-4 py-2 text-xs sm:text-sm text-center font-medium flex items-center justify-center gap-2">
           <Info className="w-4 h-4 text-[#E8BE58]" />
@@ -99,58 +106,58 @@ export default function App() {
         </div>
       )}
 
-      {/* Minimal Header with subtle link */}
+      {/* 1. CABEÇALHO SUTIL */}
       <MinimalHeader />
 
-      {/* Main Content Flow */}
+      {/* Main Content: Exact 16-section flow */}
       <main className="flex-1">
-        {/* 1. Specific Lesson Promise (Hero) */}
+        {/* 2. HERO DA AULA */}
         <LessonHero />
 
-        {/* 2. Featured Video (Privacy-friendly YouTube Embed starting at 0:00) */}
+        {/* 3. VÍDEO PRINCIPAL */}
         <PrivacyYouTubePlayer onPlayingChange={setIsPlayerActive} />
 
-        {/* 3. Practical Lesson Companion (5-question sermon outline tool with local save, copy, print) */}
+        {/* 4. MATERIAL DE APOIO PRÁTICO */}
         <LessonCompanion />
 
-        {/* 4. Small Victory Section (Lesson role vs Complete training) */}
+        {/* 5. PRIMEIRA VITÓRIA PRÁTICA (PONTE EDITORIAL) */}
         <VictorySection />
 
-        {/* 5. Identification of Visitor's Next Blocker (Interactive reflection) */}
+        {/* 6. PERCEPÇÃO DO PRÓXIMO BLOQUEIO */}
         <BlockerSelector onBlockerSelected={handleBlockerSelected} />
 
-        {/* 6. Editorial Bridge (First commercial bridge with affiliate disclosure) */}
-        <CourseBridge />
+        {/* 7. PRIMEIRA APRESENTAÇÃO DO CURSO (CARD COMPACTO) */}
+        <CompactOfferCard />
 
-        {/* 7. Course Content (5 Pedagogical Tracks + Accordion with all 40 lessons) */}
+        {/* 8. CONTEÚDO DO CURSO */}
         <CourseTracks highlightedTrackId={highlightedTrackId} />
 
-        {/* 8. 5 Verified Bonuses */}
-        <BonusGrid />
-
-        {/* 9. Instructor & Institutional Authority (Wallace Mello & Instituto de Aperfeiçoamento Cristão) */}
+        {/* 9. AUTORIDADE DO INSTRUTOR */}
         <InstructorSection />
 
-        {/* 10. Fit & Alignment (Para quem é e para quem não é) */}
-        <FitSection />
+        {/* 10. PROVA SOCIAL (DEPOIMENTOS / RELATOS) */}
+        <SocialProofSection />
 
-        {/* 11. Verified Offer (Price R$ 162 or 12x R$ 16,17, Hotmart, ref=N107470566X) */}
+        {/* 11. BÔNUS OFICIAIS */}
+        <BonusGrid />
+
+        {/* 12. OFERTA COMPLETA */}
         <OfferCard />
 
-        {/* 12. 30-Day Guarantee & Digital Certificate */}
+        {/* 13. GARANTIA */}
         <GuaranteeSection />
 
-        {/* 13. Accessible FAQ */}
+        {/* 14. FAQ */}
         <AccessibleFaq />
 
-        {/* 14. Final Decision CTA */}
+        {/* 15. CTA FINAL */}
         <FinalCta />
       </main>
 
-      {/* Comprehensive Footer */}
+      {/* 16. RODAPÉ */}
       <Footer />
 
-      {/* Mobile Sticky Bar (strictly appears only when offer is reached and player is hidden) */}
+      {/* Mobile Sticky Bar */}
       <MobileOfferBar show={shouldShowMobileBar} />
     </div>
   );

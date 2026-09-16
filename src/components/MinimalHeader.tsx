@@ -2,9 +2,9 @@ import React from "react";
 import { BookOpen, Sparkles } from "lucide-react";
 
 export const MinimalHeader: React.FC = () => {
-  const handleScrollToBridge = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleScrollToOffer = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const target = document.getElementById("ponte-curso");
+    const target = document.getElementById("primeira-oferta");
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
@@ -36,10 +36,10 @@ export const MinimalHeader: React.FC = () => {
           </div>
 
           <a
-            href="#ponte-curso"
-            onClick={handleScrollToBridge}
+            href="#primeira-oferta"
+            onClick={handleScrollToOffer}
             className="text-xs sm:text-sm font-medium text-[#356F9F] hover:text-[#17324D] transition-colors underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-[#356F9F] focus:ring-offset-2 rounded-sm py-1 px-1.5"
-            title="Pular para apresentação do curso completo"
+            title="Pular para primeira oferta do treinamento"
           >
             Já assisti — conhecer o treinamento
           </a>

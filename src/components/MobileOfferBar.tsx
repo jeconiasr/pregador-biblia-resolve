@@ -1,8 +1,8 @@
 import React from "react";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { OFFER_CONFIG } from "../config/offer";
 import { navigateToCheckout } from "../lib/checkout";
-import { trackEvent } from "../lib/analytics";
+import { trackCheckoutClick } from "../lib/analytics";
 
 interface MobileOfferBarProps {
   show: boolean;
@@ -13,8 +13,11 @@ export const MobileOfferBar: React.FC<MobileOfferBarProps> = ({ show }) => {
 
   const handleMobileCheckout = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackEvent("checkout_click", { location: "mobile_sticky_bar", price: OFFER_CONFIG.cashPrice });
-    navigateToCheckout(typeof window !== "undefined" ? window.location.search : "");
+    trackCheckoutClick("mobile_sticky_bar", "QUERO ME INSCREVER");
+    navigateToCheckout({
+      location: "mobile_sticky_bar",
+      ctaText: "QUERO ME INSCREVER",
+    });
   };
 
   return (
@@ -28,16 +31,16 @@ export const MobileOfferBar: React.FC<MobileOfferBarProps> = ({ show }) => {
           <span className="text-[10px] text-[#DED7CC] uppercase tracking-wider font-semibold">
             {OFFER_CONFIG.accessType}
           </span>
-          <span className="text-base font-black text-[#FFFDF8] tracking-tight leading-none">
-            {OFFER_CONFIG.installmentPrice}
+          <span className="text-sm font-black text-[#FFFDF8] tracking-tight leading-none">
+            7x de R$ 10,61
           </span>
-          <span className="text-[10px] text-[#DED7CC]/80">ou {OFFER_CONFIG.cashPrice} à vista</span>
+          <span className="text-[10px] text-[#DED7CC]/80">ou R$ 64,90 à vista</span>
         </div>
 
         <a
           href={OFFER_CONFIG.checkoutUrl}
           onClick={handleMobileCheckout}
-          className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[#2F7665] active:bg-[#24594D] text-[#FFFDF8] font-bold text-xs sm:text-sm shadow-md cursor-pointer min-h-[44px]"
+          className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[#2F7665] active:bg-[#24594D] text-[#FFFDF8] font-bold text-xs sm:text-sm shadow-md cursor-pointer min-h-[48px]"
         >
           <span>QUERO ME INSCREVER</span>
           <ArrowRight className="w-4 h-4 text-[#E8BE58]" />

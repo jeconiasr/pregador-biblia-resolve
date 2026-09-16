@@ -13,36 +13,36 @@ export interface BlockerOption {
 
 export const BLOCKER_OPTIONS: BlockerOption[] = [
   {
-    id: "compreender-texto",
-    label: "Compreender melhor o texto",
+    id: "escolher-desenvolver-texto",
+    label: "Não sei escolher e desenvolver o texto",
     guidance:
-      "Interpretar bem o texto bíblico e entender o contexto original é a base para não distorcer a passagem e pregar com autoridade fiel.",
+      "O treinamento ensina métodos práticos de interpretação e delimitação bíblica para você extrair a mensagem fielmente e sem insegurança.",
     matchingTrackId: 1,
-    trackName: "Trilha 1: Compreender o texto",
+    trackName: "Módulo 1: Fundamentos e Interpretação Bíblica",
   },
   {
-    id: "montar-estrutura",
-    label: "Montar a estrutura do sermão",
+    id: "organizar-ideias",
+    label: "Tenho ideias, mas não consigo organizá-las",
     guidance:
-      "Transformar ideias soltas em introdução, pontos lógicos, subdivisões e conclusão traz segurança e evita que você se perca nas anotações.",
+      "Você aprenderá como estruturar o sermão com introdução cativante, pontos principais bem encadeados e transições naturais.",
     matchingTrackId: 3,
-    trackName: "Trilha 3: Organizar o sermão",
+    trackName: "Módulo 3: Construção e Organização do Esboço",
   },
   {
-    id: "falar-clareza-seguranca",
-    label: "Falar com mais clareza e segurança",
+    id: "inseguranca-explicar",
+    label: "Sinto insegurança para explicar a passagem",
     guidance:
-      "O nervosismo e a timidez diminuem consideravelmente quando você domina a mensagem, aprende técnicas simples de oratória e postura.",
-    matchingTrackId: 5,
-    trackName: "Trilha 5: Comunicar melhor",
-  },
-  {
-    id: "manter-atencao-ouvintes",
-    label: "Manter a atenção dos ouvintes",
-    guidance:
-      "Boas ilustrações, aplicações práticas e saber conectar a verdade bíblica ao cotidiano das pessoas mantêm a igreja atenta do início ao fim.",
+      "Com técnicas de fundamentação e domínio do texto sagrado, você ganha confiança sólida no púlpito diante da congregação.",
     matchingTrackId: 2,
-    trackName: "Trilha 2: Encontrar a mensagem & Aplicação",
+    trackName: "Módulo 2: Mensagem e Teologia Prática",
+  },
+  {
+    id: "concluir-aplicar",
+    label: "Não sei como concluir e aplicar a mensagem",
+    guidance:
+      "O curso mostra passo a passo como criar conclusões memoráveis e aplicações práticas que tocam a vida diária dos ouvintes.",
+    matchingTrackId: 4,
+    trackName: "Módulo 4: Aplicação Prática e Conclusão Eficaz",
   },
 ];
 
@@ -72,6 +72,7 @@ export const BlockerSelector: React.FC<BlockerSelectorProps> = ({
     setSelectedId(option.id);
     saveStoredBlocker(option.id);
     trackEvent("blocker_selected", { blocker_id: option.id, label: option.label });
+    trackEvent("diagnosis_selected", { option_id: option.id, option_label: option.label });
 
     if (onBlockerSelected) {
       onBlockerSelected(option);
@@ -80,11 +81,11 @@ export const BlockerSelector: React.FC<BlockerSelectorProps> = ({
 
   const selectedOption = BLOCKER_OPTIONS.find((b) => b.id === (selectedBlockerId || selectedId));
 
-  const handleScrollToBridge = (e: React.MouseEvent) => {
+  const handleScrollToContent = (e: React.MouseEvent) => {
     e.preventDefault();
-    const bridge = document.getElementById("ponte-curso");
-    if (bridge) {
-      bridge.scrollIntoView({ behavior: "smooth" });
+    const content = document.getElementById("conteudo-curso");
+    if (content) {
+      content.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -94,15 +95,14 @@ export const BlockerSelector: React.FC<BlockerSelectorProps> = ({
         {/* Header */}
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#17324D]/10 text-[#17324D] text-xs font-semibold uppercase tracking-wider mb-3">
           <HelpCircle className="w-3.5 h-3.5 text-[#356F9F]" />
-          <span>Reflexão Prática</span>
+          <span>Diagnóstico Rápido</span>
         </div>
 
         <h2 className="font-serif-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#17324D] tracking-tight">
-          Em qual parte você mais precisa avançar agora?
+          Qual destas dificuldades mais atrapalha você na hora de preparar uma mensagem?
         </h2>
         <p className="mt-2 text-sm sm:text-base text-[#68727D] max-w-lg mx-auto">
-          Identifique o ponto em que você sente maior travamento ao preparar ou ministrar a sua
-          mensagem.
+          Clique na opção mais comum no seu momento atual para ver como destravar:
         </p>
 
         {/* 4 Interactive Buttons */}
@@ -114,7 +114,7 @@ export const BlockerSelector: React.FC<BlockerSelectorProps> = ({
                 key={option.id}
                 type="button"
                 onClick={() => handleSelect(option)}
-                className={`p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 ${
+                className={`p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 min-h-[56px] ${
                   isSelected
                     ? "bg-[#FFFDF8] border-[#2F7665] shadow-sm ring-2 ring-[#2F7665]/20"
                     : "bg-[#FFFDF8]/80 hover:bg-[#FFFDF8] border-[#DED7CC] hover:border-[#356F9F]/50"
@@ -146,22 +146,22 @@ export const BlockerSelector: React.FC<BlockerSelectorProps> = ({
               <Sparkles className="w-5 h-5 text-[#2F7665] shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs font-bold text-[#24594D] uppercase tracking-wide">
-                  Orientação para esta necessidade
+                  Como o curso resolve isso
                 </p>
                 <p className="mt-1 text-sm sm:text-base text-[#22303C]/90 leading-relaxed">
                   {selectedOption.guidance}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#DED7CC]/60">
                   <span className="text-xs text-[#68727D]">
-                    Abordado com profundidade em:{" "}
+                    Conteúdo detalhado em:{" "}
                     <strong className="text-[#17324D]">{selectedOption.trackName}</strong>
                   </span>
                   <a
-                    href="#ponte-curso"
-                    onClick={handleScrollToBridge}
+                    href="#conteudo-curso"
+                    onClick={handleScrollToContent}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#356F9F] hover:text-[#17324D] transition-colors"
                   >
-                    <span>Ver como o curso aborda isso</span>
+                    <span>Ver o conteúdo do treinamento</span>
                     <ArrowDown className="w-3.5 h-3.5" />
                   </a>
                 </div>

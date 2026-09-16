@@ -1,34 +1,34 @@
 export interface SermonNotes {
-  passage: string;
-  centralIdea: string;
-  purpose: string;
-  points: string;
-  conclusion: string;
+  passage: string; // 1. Texto bíblico
+  centralIdea: string; // 2. Tema central
+  introduction: string; // 3. Introdução
+  points: string; // 4. Pontos principais
+  finalApplication: string; // 5. Aplicação final
 }
 
 export const INITIAL_NOTES: SermonNotes = {
   passage: "",
   centralIdea: "",
-  purpose: "",
+  introduction: "",
   points: "",
-  conclusion: "",
+  finalApplication: "",
 };
 
-const STORAGE_KEY_NOTES = "bibliaresolve_esboco_anotacoes_v1";
+const STORAGE_KEY_NOTES = "bibliaresolve_esboco_anotacoes_v2";
 const STORAGE_KEY_BLOCKER = "bibliaresolve_bloqueio_selecionado_v1";
 
 export function loadStoredNotes(): SermonNotes {
   if (typeof window === "undefined") return INITIAL_NOTES;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_NOTES);
+    const raw = localStorage.getItem(STORAGE_KEY_NOTES) || localStorage.getItem("bibliaresolve_esboco_anotacoes_v1");
     if (!raw) return INITIAL_NOTES;
     const parsed = JSON.parse(raw);
     return {
       passage: parsed.passage || "",
       centralIdea: parsed.centralIdea || "",
-      purpose: parsed.purpose || "",
+      introduction: parsed.introduction || parsed.purpose || "",
       points: parsed.points || "",
-      conclusion: parsed.conclusion || "",
+      finalApplication: parsed.finalApplication || parsed.conclusion || "",
     };
   } catch {
     return INITIAL_NOTES;
@@ -66,22 +66,22 @@ export function formatNotesForClipboard(notes: SermonNotes): string {
   const dateStr = new Date().toLocaleDateString("pt-BR");
   return `=== MEU ESBOÇO DE PREGAÇÃO ===
 Data: ${dateStr}
-Fonte de estudo: A Bíblia Resolve | Aula: O Esboço de Pregação Passo a Passo (Aperfeiçoamento Cristão)
+Fonte de estudo: A Bíblia Resolve | Aula: O Esboço de Pregação Passo a Passo
 
-1. TEXTO BÍBLICO (Passagem delimitada):
+1. TEXTO BÍBLICO:
 ${notes.passage.trim() || "[Não preenchido]"}
 
-2. IDEIA CENTRAL (A mensagem em uma frase):
+2. TEMA CENTRAL:
 ${notes.centralIdea.trim() || "[Não preenchido]"}
 
-3. PROPÓSITO DO SERMÃO (O que o ouvinte deve compreender ou aplicar):
-${notes.purpose.trim() || "[Não preenchido]"}
+3. INTRODUÇÃO:
+${notes.introduction.trim() || "[Não preenchido]"}
 
-4. PONTOS PRINCIPAIS (Progressão do sermão):
+4. PONTOS PRINCIPAIS:
 ${notes.points.trim() || "[Não preenchido]"}
 
-5. CONCLUSÃO E APLICAÇÃO (Como a mensagem termina e conecta à vida):
-${notes.conclusion.trim() || "[Não preenchido]"}
+5. APLICAÇÃO FINAL:
+${notes.finalApplication.trim() || "[Não preenchido]"}
 
 ==============================
 Material prático de acompanhamento pessoal.`;

@@ -14,7 +14,7 @@ export const OFFER_CONFIG = {
   lessonCount: 40,
   bonusCount: 5,
   accessType: "Acesso vitalício",
-  guaranteeDays: 30,
+  guaranteeDays: 7,
   platform: "Hotmart",
   verifiedAt: "2026-09-04",
   verifiedTestimonials: [],

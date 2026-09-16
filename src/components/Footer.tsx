@@ -32,22 +32,30 @@ export const Footer: React.FC = () => {
           {/* Column 2: Disclosure & Transparency */}
           <div className="space-y-2">
             <h4 className="font-bold text-[#17324D] text-xs uppercase tracking-wider">
-              Transparência de Afiliado
+              Transparência Editorial
             </h4>
             <p className="text-xs text-[#68727D]">
-              A Bíblia Resolve participa na divulgação desta formação como afiliada. Ao realizar a
-              inscrição por meio de nossos links, podemos receber uma comissão sem qualquer acréscimo
-              no valor final para você. A responsabilidade técnica, pedagógica e de entrega é do
-              Instituto de Aperfeiçoamento Cristão na plataforma Hotmart.
+              A Bíblia Resolve é um projeto editorial independente de curadoria e recomendação de
+              materiais para estudo bíblico. Esta página contém links de afiliado. Caso você decida
+              se inscrever, podemos receber uma comissão sem nenhum custo adicional para você.
             </p>
           </div>
 
           {/* Column 3: Links & Contact */}
           <div className="space-y-2">
             <h4 className="font-bold text-[#17324D] text-xs uppercase tracking-wider">
-              Produtor e Atendimento
+              Dados do Treinamento
             </h4>
             <ul className="space-y-1.5 text-xs">
+              <li>
+                <strong>Curso:</strong> Curso Manual Completo Pregador Vocacionado
+              </li>
+              <li>
+                <strong>Produtor:</strong> Instituto de Aperfeiçoamento Cristão
+              </li>
+              <li>
+                <strong>Plataforma:</strong> Hotmart (pagamento e entrega)
+              </li>
               <li>
                 <a
                   href={OFFER_CONFIG.producerPageUrl}
@@ -60,39 +68,27 @@ export const Footer: React.FC = () => {
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
-              <li className="flex items-center gap-1.5 text-[#68727D]">
-                <Mail className="w-3.5 h-3.5 text-[#356F9F]" />
-                <span>Contato editorial: contato@abibliaresolve.com.br</span>
-              </li>
-              <li className="pt-1">
-                <span>Produtor: {OFFER_CONFIG.producerName}</span>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Legal Disclaimers */}
-        <div className="space-y-3 text-[11px] text-[#68727D]/90">
-          <p>
-            <strong>Aviso Legal sobre Curso Livre:</strong> Este curso possui modalidade livre,
-            amparada pela Lei nº 9.394/96 (Diretrizes e Bases da Educação Nacional) e pelo Decreto
-            Presidencial nº 5.154/04, com finalidade de capacitação bíblica, teológica e eclesiástica.
-            Não se trata de curso superior de graduação ou pós-graduação e não depende de
-            credenciamento ministerial junto ao MEC.
-          </p>
+        {/* Institutional Links and Copyright */}
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#68727D]">
+          <div className="flex flex-wrap items-center gap-4">
+            <a href="#termos" onClick={(e) => { e.preventDefault(); alert("Termos de Uso: Este site fornece conteúdo educativo e curadoria bibliográfica."); }} className="hover:text-[#17324D] transition-colors underline-offset-4 hover:underline">
+              Termos de Uso
+            </a>
+            <span>•</span>
+            <a href="#privacidade" onClick={(e) => { e.preventDefault(); alert("Política de Privacidade: Seus dados de anotações do esboço são salvos exclusivamente no seu próprio navegador e não são transmitidos a servidores."); }} className="hover:text-[#17324D] transition-colors underline-offset-4 hover:underline">
+              Política de Privacidade
+            </a>
+            <span>•</span>
+            <a href="mailto:contato@abibliaresolve.com.br" className="hover:text-[#17324D] transition-colors underline-offset-4 hover:underline">
+              Contato / Suporte
+            </a>
+          </div>
 
-          <p>
-            <strong>Equilíbrio Ministerial:</strong> Preparo e técnica homilética não substituem
-            oração, integridade de caráter, vida com Deus e dependência do Espírito Santo. Resultados
-            práticos na elaboração e exposição dependem de dedicação ao estudo individual, prática
-            contínua e contexto eclesiástico de cada servo.
-          </p>
-        </div>
-
-        {/* Copyright */}
-        <div className="pt-4 border-t border-[#DED7CC]/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#68727D]">
-          <p>© {new Date().getFullYear()} A Bíblia Resolve. Todos os direitos reservados.</p>
-          <p>Resultados dependem de estudo, prática e contexto individual.</p>
+          <p>© 2024 A Bíblia Resolve. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

@@ -19,9 +19,9 @@ export const GuaranteeSection: React.FC = () => {
               </h3>
 
               <p className="text-sm sm:text-base text-[#22303C]/85 leading-relaxed">
-                O produtor informa uma garantia incondicional de <strong>{OFFER_CONFIG.guaranteeDays} dias</strong>. Dentro
-                desse período, caso o treinamento não corresponda ao que você esperava, é possível
-                solicitar reembolso conforme as condições do produtor e da plataforma Hotmart.
+                Se dentro desse período de <strong>7 dias</strong> você achar que o treinamento não
+                atendeu às suas expectativas, pode solicitar o <strong>reembolso integral</strong> diretamente
+                pela plataforma Hotmart. Sem burocracia, sem perguntas e com 100% de devolução do valor pago.
               </p>
             </div>
 
