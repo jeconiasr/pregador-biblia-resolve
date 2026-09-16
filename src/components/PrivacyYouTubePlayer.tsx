@@ -3,6 +3,7 @@ import { Play, ExternalLink, RefreshCw, Sparkles, X, ArrowRight } from "lucide-r
 import { motion, AnimatePresence } from "motion/react";
 import { VIDEO_CONFIG } from "../config/video";
 import { TIMED_OFFER_CONFIG } from "../config/timedOffer";
+import { navigateToCheckout } from "../lib/checkout";
 import {
   trackEvent,
   trackTimedOfferRevealed,
@@ -306,24 +307,32 @@ export const PrivacyYouTubePlayer: React.FC<PrivacyYouTubePlayerProps> = ({ onPl
     handleStartPlay(VIDEO_CONFIG.sharedTimestampSeconds);
   };
 
-  const handleBannerClose = () => {
+  const handleBannerClose = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
     setShowOverlayBanner(false);
     if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
     trackTimedOfferDismissed("banner_close");
   };
 
-  const handleBannerCtaClick = () => {
+  const handleBannerContinueWatching = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowOverlayBanner(false);
+    if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
+    trackTimedOfferDismissed("continue_watching");
+  };
+
+  const handleBannerCtaClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     setShowOverlayBanner(false);
     if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
     trackTimedOfferClicked({
       buttonText: TIMED_OFFER_CONFIG.overlayButtonText,
       offerVariant: TIMED_OFFER_CONFIG.variant,
     });
-
-    const cardEl = document.getElementById("timed-offer-card");
-    if (cardEl) {
-      cardEl.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    navigateToCheckout({
+      location: "video_overlay_notice",
+      ctaText: TIMED_OFFER_CONFIG.overlayButtonText,
+    });
   };
 
   const currentFallbackEmbedUrl = `https://www.youtube-nocookie.com/embed/${VIDEO_CONFIG.youtubeId}?rel=0&playsinline=1&autoplay=1${
@@ -418,42 +427,61 @@ export const PrivacyYouTubePlayer: React.FC<PrivacyYouTubePlayerProps> = ({ onPl
                   <div id="youtube-player-mount" className="w-full h-full" />
                 )}
 
-                {/* 1. Discrete Overlay Banner over video (approx 8 seconds) */}
+                {/* 1. Discrete Overlay Notice over video (approx 8 seconds) */}
                 <AnimatePresence>
                   {showOverlayBanner && (
                     <motion.div
                       role="status"
                       aria-live="polite"
-                      initial={{ opacity: 0, y: 14, scale: 0.96 }}
+                      initial={{ opacity: 0, y: 16, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.96 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-xl z-30 bg-[#FFFDF8]/95 backdrop-blur-md border border-[#2F7665]/50 rounded-xl p-2.5 sm:p-3 shadow-2xl flex items-center justify-between gap-2 pointer-events-auto"
+                      exit={{ opacity: 0, y: 12, scale: 0.96 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-lg z-30 bg-[#17324D]/95 backdrop-blur-md border border-[#E8BE58]/45 rounded-2xl p-3 sm:p-4 shadow-2xl text-left pointer-events-auto"
                     >
-                      <div className="flex items-center gap-2 min-w-0 flex-1 pl-1">
-                        <span className="w-2 h-2 rounded-full bg-[#2F7665] shrink-0 animate-pulse" />
-                        <p className="text-xs sm:text-sm font-semibold text-[#17324D] leading-tight line-clamp-2">
-                          {TIMED_OFFER_CONFIG.overlayBannerText}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <button
-                          type="button"
-                          onClick={handleBannerCtaClick}
-                          className="inline-flex items-center justify-center gap-1 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-[#2F7665] hover:bg-[#24594D] active:scale-95 text-[#FFFDF8] font-bold text-xs shadow transition-all whitespace-nowrap min-h-[44px] cursor-pointer"
-                        >
-                          <span>{TIMED_OFFER_CONFIG.overlayButtonText}</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#E8BE58]" />
-                        </button>
+                      {/* Top row: Title + Close 'X' */}
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="w-2 h-2 rounded-full bg-[#E8BE58] shrink-0 animate-pulse" />
+                          <h4 className="font-serif-editorial text-sm sm:text-base font-bold text-[#FFFDF8] leading-tight">
+                            {TIMED_OFFER_CONFIG.overlayTitle}
+                          </h4>
+                        </div>
 
                         <button
                           type="button"
                           onClick={handleBannerClose}
-                          aria-label="Fechar aviso de oferta"
-                          className="p-2 rounded-lg text-[#68727D] hover:text-[#17324D] hover:bg-[#DED7CC]/40 transition-colors cursor-pointer min-h-[44px] min-w-[36px] flex items-center justify-center"
+                          aria-label="Fechar aviso"
+                          className="text-[#DED7CC]/70 hover:text-[#FFFDF8] p-1 rounded-lg transition-colors cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center -mr-1 -mt-1"
                         >
                           <X className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      {/* Subtext */}
+                      <p className="text-xs sm:text-sm text-[#DED7CC] leading-relaxed mb-3 pl-4">
+                        {TIMED_OFFER_CONFIG.overlaySubtitle}
+                      </p>
+
+                      {/* Action row: Primary CTA + Discrete 'Continuar assistindo' */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-0.5 pl-4">
+                        <a
+                          href={TIMED_OFFER_CONFIG.checkoutUrl}
+                          onClick={handleBannerCtaClick}
+                          id="overlay-notice-cta-button"
+                          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#2F7665] hover:bg-[#24594D] active:scale-[0.99] text-[#FFFDF8] font-bold text-xs sm:text-sm shadow-md transition-all whitespace-nowrap min-h-[42px] cursor-pointer border border-[#E8BE58]/30"
+                        >
+                          <span>{TIMED_OFFER_CONFIG.overlayButtonText}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#E8BE58]" />
+                        </a>
+
+                        <button
+                          type="button"
+                          onClick={handleBannerContinueWatching}
+                          id="overlay-notice-continue-button"
+                          className="text-xs font-medium text-[#DED7CC] hover:text-[#FFFDF8] transition-colors underline-offset-4 hover:underline cursor-pointer py-1 text-left sm:text-right"
+                        >
+                          {TIMED_OFFER_CONFIG.overlayDismissText}
                         </button>
                       </div>
                     </motion.div>

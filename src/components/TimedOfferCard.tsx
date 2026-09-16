@@ -60,7 +60,7 @@ export const TimedOfferCard: React.FC<TimedOfferCardProps> = ({
         <div className="shrink-0 flex flex-col items-center">
           <OfficialPreacherCharacter className="w-32 h-44 sm:w-40 sm:h-52" />
           <span className="text-[11px] font-semibold text-[#68727D] tracking-wide mt-1">
-            Prof. Wallace Mello
+            Seu guia Bíblia Resolve
           </span>
         </div>
 

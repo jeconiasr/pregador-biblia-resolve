@@ -37,8 +37,11 @@ export const TIMED_OFFER_CONFIG = {
     "Certificado digital de conclusão",
     "Acesso vitalício à área de membros",
   ],
-  overlayBannerText: "Você já deu o primeiro passo. Que tal continuar seu preparo?",
+  overlayTitle: "Você já deu o primeiro passo.",
+  overlaySubtitle: "Quando estiver pronto, continue seu preparo com o treinamento completo.",
+  overlayBannerText: "Você já deu o primeiro passo.",
   overlayButtonText: "CONHECER O TREINAMENTO",
+  overlayDismissText: "Continuar assistindo",
   secureCheckoutNotice: "Você será direcionado para o checkout seguro da Hotmart.",
   secondaryActionText: "CONTINUAR ASSISTINDO À AULA",
 } as const;
